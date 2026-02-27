@@ -2,7 +2,9 @@
 
 ## Opis Ogólny
 
-System do cyklicznego pobierania danych o jakości powietrza, przetwarzania ich w czasie rzeczywistym przy użyciu Apache Kafka i przygotowywania do dalszej analizy oraz alertowania.
+Rozproszony system do cyklicznego pobierania, przetwarzania w czasie rzeczywistym oraz analizy danych o jakości powietrza. Architektura oparta na mikrousługach i strumieniowym przesyłaniu wiadomości pozwala na bieżące monitorowanie zanieczyszczeń (PM10, PM2.5) oraz generowanie automatycznych alertów o przekroczeniach norm.
+
+Projekt wykorzystuje narzędzia takie jak Apache Kafka w roli brokera wiadomości oraz FastAPI do serwowania przetworzonych wyników i alertów poprzez interfejs REST API.
 
 Składa się z następujących komponentów:
 1.  **`air_quality_fetcher.py`**: Pobiera dane o jakości powietrza (PM10 i PM2.5) z publicznego API GIOŚ.
@@ -155,36 +157,3 @@ Możesz obserwować wiadomości na tematach Kafki używając narzędzia `kafka-c
   - `requirements.txt`: Lista zależności Python.
   - `gios_20250508T111758Z.json`: Przykładowy plik z danymi generowanymi przez `air_quality_fetcher.py`.
 
---- 5. Uruchamianie systemu z fastapi:
-
-
-	1.Uruchom kontenery Docker (Kafka, Zookeeper, FastAPI):
-	W terminalu, w katalogu z plikiem docker-compose.yml, wykonaj: docker-compose up -d
-
-	2. Uruchom alert_detector.py (Wykrywanie alertów):
-	Otwórz nowy terminal, przejdź do folderu projektu i aktywuj środowisko, a następnie uruchom:
-	python alert_detector.py
-
-	3. Uruchom air_quality_processor.py (Przetwarzanie danych):
-	W nowym terminalu, aktywuj środowisko i uruchom:
-	python air_quality_processor.py
-
-	4. Uruchom air_quality_fetcher.py (Pobieranie danych z GIOŚ):
-	W kolejnym terminalu, aktywuj środowisko i uruchom:
-	python air_quality_fetcher.py
-
-	5. Sprawdź działanie API:
-	Otwórz przeglądarkę i przejdź do adresu:
-	http://localhost:8000/docs
-	Tam możesz testować endpointy REST API i sprawdzić dane jakości powietrza oraz alerty.]
-
-	- Wyłącznie systemu:
-
-	Zatrzymaj skrypty Pythona:
-	W terminalach, gdzie działają air_quality_fetcher.py, air_quality_processor.py i alert_detector.py, 	naciśnij Ctrl+C
-
-	Zatrzymaj kontenery Docker (Kafka, Zookeeper, FastAPI):
-	W terminalu, w katalogu z plikiem docker-compose.yml, wykonaj:
-	docker-compose down
-
-	
