@@ -1,0 +1,18 @@
+# Środowisko wirtualne
+.venv/
+venv/
+
+# Cache Pythona
+__pycache__/
+*.py[cod]
+*.class
+
+# Logi
+*.log
+
+# Pobrane dane
+data/
+*.json
+
+# Pliki systemowe macOS
+.DS_Store
