@@ -6,7 +6,23 @@ Rozproszony system do cyklicznego pobierania, przetwarzania w czasie rzeczywisty
 
 Projekt wykorzystuje narzędzia takie jak Apache Kafka w roli brokera wiadomości oraz FastAPI do serwowania przetworzonych wyników i alertów poprzez interfejs REST API.
 
-Składa się z następujących komponentów:
+```mermaid
+graph LR
+    A[GIOŚ API] -- REST GET --> B(Fetcher Service)
+    B -- JSON --> C{Kafka: air_quality_raw}
+    C --> D(Processor Service)
+    D -- Walidacja & Normalizacja --> E{Kafka: air_quality_processed}
+    E --> F(Alert Detector)
+    E --> G(FastAPI Server)
+    F -- Logi Alertów --> H[Plik / Konsola]
+    G -- REST API --> I[Użytkownik / Swagger UI]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#ff9,stroke:#333,stroke-width:2px
+    style G fill:#bbf,stroke:#333,stroke-width:2px
+
+Składa się z komponentów:
 1.  **`air_quality_fetcher.py`**: Pobiera dane o jakości powietrza (PM10 i PM2.5) z publicznego API GIOŚ.
 2.  **Apache Kafka**: Broker wiadomości używany do przesyłania danych między komponentami.
 3.  **`air_quality_processor.py`**: Konsumuje surowe dane z Kafki, waliduje je, transformuje (np. normalizuje timestampy) i wysyła przetworzone dane na inny temat Kafki.
