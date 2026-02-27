@@ -11,7 +11,7 @@ graph LR
     A[GIOŚ API] -- REST GET --> B(Fetcher Service)
     B -- JSON --> C{Kafka: air_quality_raw}
     C --> D(Processor Service)
-    D -- Walidacja & Normalizacja --> E{Kafka: air_quality_processed}
+    D -- Walidacja i Normalizacja --> E{Kafka: air_quality_processed}
     E --> F(Alert Detector)
     E --> G(FastAPI Server)
     F -- Logi Alertów --> H[Plik / Konsola]
