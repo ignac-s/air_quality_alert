@@ -21,6 +21,7 @@ graph LR
     style C fill:#ff9,stroke:#333,stroke-width:2px
     style E fill:#ff9,stroke:#333,stroke-width:2px
     style G fill:#bbf,stroke:#333,stroke-width:2px
+```
 
 Składa się z komponentów:
 1.  **`air_quality_fetcher.py`**: Pobiera dane o jakości powietrza (PM10 i PM2.5) z publicznego API GIOŚ.
